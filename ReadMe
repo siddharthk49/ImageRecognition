@@ -1,0 +1,28 @@
+Overview:
+User inputs an image. We use inception V3 model under the hood and we get what that image is. Basically, image recognition app.
+
+Solution Overview:
+Three components:
+1. Register -  Lets user register to the App (generates username and password for the user)
+2. Classify - Image classification(takes in username, password, URL of the image and classify the image in the URL)
+3. Refill - Let's user tokens to be refilled. User needs tokens to classify image
+
+
+Technical Overview:
+
+Resources|	URL 	  |  Method	|Parameter	                    |    Status Code
+-----------------------------------------------------------------------------------------------
+register |	/register |	POST	|username, password	            |    200: success
+         |            |         |                               |       301: invalid
+         |
+-----------------------------------------------------------------------------------------------
+classify |	/classify |	POST	|username, password, URL	    |        200: success
+         |            |         |                               |       301:  invalid username
+         |            |         |                               |       302: invalid password
+         |            |         |                               |       303: not enough tokens
+         |            |         |                               |       400: no URL
+--------------------------------------------------------------------------------------------------
+refill	 |   /refill  |	    POST|	username, admin password,   |       200: success
+         |            |         |              no of tokens	    |
+         |            |         |                               |   301: invalid username
+         |            |         |                               |   302: wrong password"
